@@ -2,21 +2,11 @@
 # Name:        Cleaning Directory
 # Purpose:     Walks Directory and clears any files extending past 30 day period. Recursively
 #              checks any subdirectories also. Any files that are not writeable are passed.
-#
-# Author:      Todd Ulery
-#
-# Created:     05/12/2013
-# Copyright:   HDR Inc.
-
 #-------------------------------------------------------------------------------
 
 import os, time, shutil
-
 from os import sys
 
-# One day = 86400 seconds x 30 days
-
-##base = os.curdir
 base = r"E:\gis\projects\IL\Chicago\CDOT_Menu_Pro\Spatial\gdb\working\scratch"
 
 #Check if Dir
