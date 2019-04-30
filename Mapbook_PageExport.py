@@ -1,11 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:        Mapbook_PageExport.py
 # Purpose:     To export a single page from mxd that matches user input of CCE and Block number.
-#
-# Author:      Todd Ulery and Seth Hays
-#
-# Created:     11/26/2012
-# Copyright:   (c) HDR Inc.
 #-------------------------------------------------------------------------------
 
 import arcpy, os, sys,  textwrap
@@ -163,7 +158,7 @@ def mainRun(cce, blockNo, output_path, mapBook, mapPrefix):
         if "-AS-" in cceInput and elm.name == "DriveAlleyCSY_elm":
             elm.text = " "
 
-        """Added Combo Project Text"""#TBU-01/24/2014
+    """Added Combo Project Text"""
     if mapPrefix == "PhotoLines":
         pageNo = str(cce + "_" + blockNo)
         for elm in arcpy.mapping.ListLayoutElements(mxd, "TEXT_ELEMENT"):
@@ -176,8 +171,7 @@ def mainRun(cce, blockNo, output_path, mapBook, mapPrefix):
                     elm.text = cceInput
 
     # Save Page from Mapbook
-    mxd.saveACopy(output_path +"\\" + str(mapPrefix) + "_" + str(pageNo) + '.mxd')
-    ##arcpy.mapping.ExportToPNG(mxd, output + str(pageNo) + ".png")
+    mxd.saveACopy(output_path +"\\" + str(mapPrefix) + "_" + str(pageNo) + '.mxd')    
     arcpy.mapping.ExportToPDF(mxd, output_path +"\\" + str(mapPrefix) + "_" + str(pageNo) + "_DRAFT.pdf")
     arcpy.AddMessage("The output has been saved to the following location: " + output_path)
     print ("New mxd Is Located... " + output_path)
@@ -186,18 +180,21 @@ def mainRun(cce, blockNo, output_path, mapBook, mapPrefix):
 # Assign Parameters
 cce = arcpy.GetParameterAsText(0)
 if cce == "#" or not cce:
-    cce = "11-AS-810"
+    cce = "11-AS-810"    
 blockNo = arcpy.GetParameterAsText(1)
+
 if blockNo == "#" or not blockNo:
-    blockNo = "1"
+    blockNo = "1"    
 mapPrefix = arcpy.GetParameterAsText(2)
+
 if mapPrefix == "#" or not mapPrefix:
     mapPrefix = "IHC"
 mapBook = arcpy.GetParameterAsText(3)
+
 if mapBook == "#" or not mapBook:
-    mapBook = r"E:\gis\projects\IL\Chicago\CDOT_Menu_Pro\Map_Docs\Draft\2014\CDOT_MenuProgram_8_5x14_2014.mxd"
-    #mapBook = arcpy.mapping.MapDocument(mapBook1)
+    mapBook = r"E:\gis\projects\IL\Chicago\CDOT_Menu_Pro\Map_Docs\Draft\2014\CDOT_MenuProgram_8_5x14_2014.mxd"    
 output_path = arcpy.GetParameterAsText(4)
+
 if output_path == "#" or not output_path:
     output_path = r"E:\gis\projects\IL\Chicago\CDOT_Menu_Pro\Map_Docs\Final\Menu_Mapbook_PageExport"
 
